@@ -32,6 +32,8 @@ class Tb_AGV002 extends React.PureComponent<any, IGridProps> {
                 { name: 'skuCode', type: 'string' },
                 { name: 'name', type: 'string' },
                 { name: 'quantity', type: 'number' },
+                { name: 'price', type: 'number' },
+
             ],
             datatype: 'json',
             localdata: '',
@@ -48,10 +50,12 @@ class Tb_AGV002 extends React.PureComponent<any, IGridProps> {
 
         const columns: any = [
 
-            { text: 'boxno',editable:false, width: '20%', filterable: false, align: 'center', cellsalign: 'center', },
-            { text: 'skuCode',editable:false, width: '20%', filterable: false, align: 'center', cellsalign: 'center', },
-            { text: 'name',editable:false, filterable: false, align: 'center', cellsalign: 'center', width: '40%', },
-            { text: 'Quantity', width: 70, cellsalign: 'right' },
+            { text: 'ID',editable:false, width: '20%', filterable: false, align: 'center', cellsalign: 'center', },
+            { text: 'SKUCode',editable:false, width: '20%', filterable: false, align: 'center', cellsalign: 'center', },
+            { text: 'Name',editable:false, filterable: false, align: 'center', cellsalign: 'center', width: '40%', },
+            { text: 'Quantity', width: '10%', cellsalign: 'right', align: 'center',},
+            { text: 'Price', width: '10%', cellsalign: 'right', align: 'center',},
+
         ]
 
         return (

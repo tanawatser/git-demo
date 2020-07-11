@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Tb_AGV002 from './Components/Tb_AGV002';
+import Alertdate from './Alertdate';
+import JqxGrid from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxgrid';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <Alertdate /> */}
+    {/* <JqxGrid /> */}
+     <Tb_AGV002 />
   </React.StrictMode>,
   document.getElementById('root')
 );
