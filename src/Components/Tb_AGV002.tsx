@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { MDBIcon, MDBBtn } from "mdbreact";
 import JqxGrid, { IGridProps, jqx } from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxgrid';
+import JqxDateTimeInput from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxdatetimeinput';
 import JqxTooltip from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxtooltip';
 import "jqwidgets-scripts/jqwidgets/styles/jqx.base.css";
 import "jqwidgets-scripts/jqwidgets/styles/jqx.material-purple.css";
@@ -10,75 +11,81 @@ import "jqwidgets-scripts/jqwidgets/styles/jqx.metrodark.css";
 class Tb_AGV002 extends React.PureComponent<any, IGridProps> {
 
     private myGrid = React.createRef<JqxGrid>();
+
+
     constructor(props: {}) {
         super(props);
-      
-
-    }
-
-    componentDidMount() {
-        // console.log('prop_data');
-        // console.log(this.props.ViewData);
-        // console.log('<------------------->');
-
-    }
-
-    public render() {
 
         //const data = this.props.ViewData;
-        const source: any = {
+
+        const source: any = 
+        {
             datafields: [
-                { name: 'boxno', type: 'string' },
-                { name: 'skuCode', type: 'string' },
-                { name: 'name', type: 'string' },
-                { name: 'quantity', type: 'number' },
-                { name: 'price', type: 'number' },
+
+                { name: 'id', type: 'string', map: '0' },
+                { name: 'fname', type: 'string', map: '1' },
+                { name: 'nickname', type: 'string', map: '2' },
+                { name: 'tel', type: 'string', map: '3' },
+                { name: 'workdate', type: 'string', map: '4' },
+                { name: 'worktime', type: 'string', map: '5' },
+                { name: 'begtime', type: 'string', map: '6' },
+                { name: 'upd', type: 'string', map: '7' }
 
             ],
-            datatype: 'json',
-            localdata: '',
-            updaterow: (rowid: any, rowdata: any, commit: any): void => {
-                // synchronize with the server - send update command   
-                commit(true);
+  
+            datatype: 'array',
+            localdata: this.props.data
 
-                // console.group('Value callInBound');
-                // console.log(rowdata);
-                // console.groupEnd();
-                this.props.updatedata(rowdata);
-            }
         };
 
-        const columns: any = [
+        this.state = {
+            columns:[
+                { text: 'ID', datafield: 'id',editable:false, width: '10%', filterable: false, align: 'center', cellsalign: 'left', },
+                { text: 'Name', datafield: 'fname',editable:false, width: '25%', filterable: false, align: 'center', cellsalign: 'left', },
+                { text: 'Nickname', datafield: 'nickname',editable:false, filterable: false, align: 'center', cellsalign: 'left', width: '10%', },
+                { text: 'Telephone Number', datafield: 'tel', width: '15%', cellsalign: 'left', align: 'center',},
+                { text: 'Work date', datafield: 'workdate', width: '10%', cellsalign: 'center', align: 'center',},
+                { text: 'Work time', datafield: 'worktime' , width: '10%', cellsalign: 'center', align: 'center',},
+                { text: 'Start time', datafield: 'begtime', width: '10%', cellsalign: 'center', align: 'center',},
+                { text: 'Update', datafield: 'upd' , width: '10%', cellsalign: 'center', align: 'center',},
+            ],
+            source: new jqx.dataAdapter(source),
+        }
+    }
+    componentDidUpdate(){
+        console.log(this.props.data)
 
-            { text: 'ID',editable:false, width: '20%', filterable: false, align: 'center', cellsalign: 'center', },
-            { text: 'SKUCode',editable:false, width: '20%', filterable: false, align: 'center', cellsalign: 'center', },
-            { text: 'Name',editable:false, filterable: false, align: 'center', cellsalign: 'center', width: '40%', },
-            { text: 'Quantity', width: '10%', cellsalign: 'right', align: 'center',},
-            { text: 'Price', width: '10%', cellsalign: 'right', align: 'center',},
+}
 
-        ]
+    render() {
 
         return (
             <div>
+                <label>From</label>
+                <JqxDateTimeInput width={140} height={25}  textAlign='center' /> 
+                <br />
+                <label>To</label>
+                <JqxDateTimeInput width={140} height={25}  textAlign='center' />
+                <button> + </button>
+               
                 <JqxGrid
-
+                
                     ref={this.myGrid}
-                    height={550}
-                    width={'100%'}
-                    source={new jqx.dataAdapter(source)}
+                    width='100%'
+                    source={this.state.source}
                     pageable={true}
                     autoheight={true}
-                    columns={columns}
+                    columns={this.state.columns}
                     theme="metrodark"
                     editable={true}
                     enabletooltips={true}
                     selectionmode={'singlecell'}
                     editmode={'click'}
+                    columnsresize={true}
+                    sortable={true}
                 />
-
-
-
             </div>
+            
         );
     }
 }

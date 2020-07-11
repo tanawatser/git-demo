@@ -1,11 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Table from './Components/Table'
+import SearchButton from './Components/SearchButton';
 
 function App() {
   return (
     <div className="App">
-  
+   <Table />
+   {/* <SearchButton /> */}
     </div>
   );
 }
