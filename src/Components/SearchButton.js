@@ -1,24 +1,34 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class SearchButton extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
+    this.state = {
+      startDate: [],
+      endDate: [],
+      filterDate:[],
+      row:'',
+      date:''
+    };
+  }
+  searchClick() {
+    this.setState({
+        startDate:this.startDate.filter(),
+        endDate:this.endDate.filter(),
 
-        
-        this.state = {
-        }
-    }
-    searchClick () {
+    });
+  }
+  render() {
 
-    }
-    
-    render() {
-        return (
-            <div>
-                <button onClick={this.searchClick}> + </button>
-            </div>
-        )
-    }
+    return (
+      <div>
+     
+        {/* <button type="submit" onClick={this.state.searchClick}>
+          <i className="fa fa-search"></i> ค้นหา
+        </button> */}
+      </div>
+    );
+  }
 }
 
-export default SearchButton
+export default SearchButton;

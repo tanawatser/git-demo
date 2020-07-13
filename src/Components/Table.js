@@ -1,31 +1,48 @@
-import React, { Component } from 'react'
-import Tb_AGV002 from '../Components/Tb_AGV002.tsx'
+import React, { Component } from "react";
+import Tb_AGV002 from "../Components/Tb_AGV002.tsx";
 
 class Table extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+      data: [],
+      startDate: [],
+      endDate: [],
+      filterDate:[],
+      row:'',
+      date:'',
 
-        this.state = {
-            tb:[]
-                 
-        }
+    };
+  }
+  componentDidMount() {
+    fetch("http://172.18.9.55:3200/")
+      // fetch('https://jsonplaceholder.typicode.com/users')
 
-        fetch("http://172.18.9.55:3200/").then(res => res.json()).then((res)=>{
-            // console.log(re);
-            this.setState({tb:res})
-            // console.log(this.state.TB)
-        })
+      .then((res) => res.json())
+      .then((res) => {
+        // console.log(res);
+        this.setState({
+          isLoading: true,
+          data: res,
 
+        });
+        //   console.log(this.state.tb)
+      });
+  }
+
+
+  render() {
+    const { isLoading, data } = this.state;
+    if (!isLoading) {
+      return <div> L O A D I N G . . .</div>;
+    } else {
+      return (
+        <div>
+          <Tb_AGV002 data={this.state.data} />
+        </div>
+      );
     }
-
-    render() {
-        
-        return (
-            <div>
-                <Tb_AGV002 data={this.state.tb}/>
-            </div>
-        )
-    }
+  }
 }
-
-export default Table
+export default Table;
